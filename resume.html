@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>조현호 | Java Backend Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1628;
+      --bg3: #141c35;
+      --card: #111827;
+      --border: #1e2d4d;
+      --accent: #3b82f6;
+      --accent2: #60a5fa;
+      --accent3: #93c5fd;
+      --gold: #f59e0b;
+      --text: #e2e8f0;
+      --text2: #94a3b8;
+      --text3: #64748b;
+      --green: #10b981;
+      --purple: #8b5cf6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--accent2);
+      letter-spacing: 0.1em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text2);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent2); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .hero-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-label::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #e2e8f0 30%, #93c5fd 70%, #60a5fa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(14px, 2vw, 18px);
+      color: var(--accent2);
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text2);
+      max-width: 580px;
+      line-height: 1.8;
+      margin-bottom: 48px;
+    }
+
+    .hero-desc strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .contact-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text2);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .contact-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent2);
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .contact-chip .icon { font-size: 14px; }
+
+    .hero-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 6px 14px;
+      border-radius: 2px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .badge-blue { background: rgba(59,130,246,0.15); color: var(--accent2); border: 1px solid rgba(59,130,246,0.3); }
+    .badge-green { background: rgba(16,185,129,0.12); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+    .badge-gold { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+    .badge-purple { background: rgba(139,92,246,0.12); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
+
+    .hero-years {
+      position: absolute;
+      right: 48px;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: right;
+    }
+
+    .years-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 120px;
+      font-weight: 700;
+      color: rgba(59, 130, 246, 0.07);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .years-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* ── SECTION COMMON ── */
+    section {
+      padding: 100px 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      margin-bottom: 64px;
+    }
+
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+      margin-left: 24px;
+    }
+
+    /* ── SUMMARY STATS ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 80px;
+    }
+
+    .stat-box {
+      background: var(--card);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--accent2);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text3);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg2); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-category {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .skill-category::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+    }
+
+    .skill-category.cat-java::before { background: linear-gradient(180deg, #f59e0b, #d97706); }
+    .skill-category.cat-infra::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+    .skill-category.cat-db::before { background: linear-gradient(180deg, #10b981, #059669); }
+    .skill-category.cat-front::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+    .skill-category.cat-ai::before { background: linear-gradient(180deg, #ec4899, #be185d); }
+    .skill-category.cat-tools::before { background: linear-gradient(180deg, #64748b, #475569); }
+
+    .skill-category:hover { border-color: rgba(59,130,246,0.4); }
+
+    .cat-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .cat-java .cat-title { color: #fbbf24; }
+    .cat-infra .cat-title { color: var(--accent2); }
+    .cat-db .cat-title { color: #34d399; }
+    .cat-front .cat-title { color: #a78bfa; }
+    .cat-ai .cat-title { color: #f472b6; }
+    .cat-tools .cat-title { color: #94a3b8; }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      padding: 5px 12px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text2);
+      transition: all 0.2s;
+    }
+
+    .skill-tag:hover {
+      background: rgba(59,130,246,0.1);
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .skill-tag.highlight {
+      background: rgba(236,72,153,0.1);
+      border-color: rgba(236,72,153,0.3);
+      color: #f472b6;
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+      padding: 48px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .exp-item:last-child { border-bottom: none; }
+
+    .exp-meta {
+      padding-top: 4px;
+    }
+
+    .exp-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .exp-current {
+      display: inline-block;
+      padding: 3px 8px;
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 2px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: #34d399;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .exp-company {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .exp-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent2);
+      margin-bottom: 20px;
+    }
+
+    .exp-desc {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .exp-projects {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .project-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      transition: all 0.2s;
+    }
+
+    .project-card:hover {
+      background: rgba(59,130,246,0.05);
+      border-left-color: var(--accent2);
+    }
+
+    .project-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .project-detail {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    .project-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text3);
+      margin-top: 6px;
+    }
+
+    .exp-tasks {
+      margin-top: 20px;
+    }
+
+    .exp-tasks-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text3);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .task-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .task-list li {
+      font-size: 13px;
+      color: var(--text2);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .task-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 10px;
+      top: 4px;
+    }
+
+    /* ── EDUCATION & CERT ── */
+    #edu { background: var(--bg2); }
+
+    .edu-cert-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .edu-sub-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .edu-item {
+      padding: 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .edu-school {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .edu-dept {
+      font-size: 13px;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+
+    .edu-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text3);
+    }
+
+    .edu-detail {
+      font-size: 12px;
+      color: var(--text3);
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+
+    .cert-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .cert-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(245,158,11,0.12);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .cert-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .cert-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text3);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 48px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .footer-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── SCROLL ANIMATION ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section { padding: 64px 24px; }
+      .hero { padding: 100px 24px 64px; }
+      .hero-years { display: none; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .exp-item { grid-template-columns: 1fr; gap: 16px; }
+      .edu-cert-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">JO HYUN HO · DEV</div>
+  <ul class="nav-links">
+    <li><a href="#about">소개</a></li>
+    <li><a href="#skills">기술스택</a></li>
+    <li><a href="#experience">경력</a></li>
+    <li><a href="#edu">학력·자격증</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <div class="hero-label">Java Backend Developer</div>
+    <h1 class="hero-name">조현호</h1>
+    <div class="hero-title">// Backend Engineer · Insurance Domain · SI</div>
+
+    <p class="hero-desc">
+      보험업계 <strong>전자청약·전자인증 솔루션</strong>을 개발하는 Java 백엔드 엔지니어입니다.<br>
+      프론트엔드 React 개발로 커리어를 시작해 <strong>풀스택 이해도</strong>를 갖춘 백엔드 전문가로 성장했습니다.<br>
+      인프라 구축부터 API 설계, DB 최적화까지 <strong>시스템 전반을 주도적으로</strong> 다룹니다.
+    </p>
+
+    <div class="hero-contacts">
+      <a class="contact-chip" href="mailto:twinh601@gmail.com">
+        <span class="icon">✉</span> twinh601@gmail.com
+      </a>
+      <a class="contact-chip" href="tel:010-4601-7897">
+        <span class="icon">☎</span> 010-4601-7897
+      </a>
+      <a class="contact-chip" href="https://github.com/hajun2" target="_blank">
+        <span class="icon">⌥</span> github.com/hajun2
+      </a>
+    </div>
+
+    <div class="hero-badges">
+      <span class="badge badge-blue">Java / Spring Boot</span>
+      <span class="badge badge-green">4년+ 경력</span>
+      <span class="badge badge-gold">보험 SI · 솔루션</span>
+      <span class="badge badge-purple">AI-Assisted Dev</span>
+    </div>
+  </div>
+
+  <div class="hero-years">
+    <div class="years-number">4+</div>
+    <div class="years-label">Years of Experience</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div style="padding: 0 48px; position: relative; z-index: 1;">
+  <div class="stats-row fade-in">
+    <div class="stat-box">
+      <div class="stat-num">4+</div>
+      <div class="stat-label">개발 경력 (년)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">보험사 프로젝트</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">3대</div>
+      <div class="stat-label">WAS 솔루션 운용</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">2개</div>
+      <div class="stat-label">기술 자격증</div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">기술 스택</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="skills-grid">
+
+    <div class="skill-category cat-java fade-in">
+      <div class="cat-title">Backend · Java</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">Spring Boot</span>
+        <span class="skill-tag">Spring Framework</span>
+        <span class="skill-tag">Spring Security</span>
+        <span class="skill-tag">eGovFramework</span>
+        <span class="skill-tag">JSP</span>
+        <span class="skill-tag">REST API</span>
+        <span class="skill-tag">MyBatis</span>
+      </div>
+    </div>
+
+    <div class="skill-category cat-infra fade-in">
+      <div class="cat-title">Infra · Server</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Linux (CentOS / Ubuntu)</span>
+        <span class="skill-tag">Apache</span>
+        <span class="skill-tag">Tomcat</span>
+        <span class="skill-tag">JEUS</span>
+        <span class="skill-tag">LENA</span>
+        <span class="skill-tag">JBOSS</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">WEB/WAS 구성</span>
+      </div>
+    </div>
+
+    <div class="skill-category cat-db fade-in">
+      <div class="cat-title">Database</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Oracle DB</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">MariaDB</span>
+        <span class="skill-tag">SQL 튜닝</span>
+        <span class="skill-tag">프로시저 개발</span>
+      </div>
+    </div>
+
+    <div class="skill-category cat-front fade-in">
+      <div class="cat-title">Frontend (보조)</div>
+      <div class="skill-tags">
+        <span class="skill-tag">React.js</span>
+        <span class="skill-tag">Next.js</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">Redux Toolkit</span>
+        <span class="skill-tag">React Query</span>
+        <span class="skill-tag">styled-components</span>
+        <span class="skill-tag">GraphQL</span>
+      </div>
+    </div>
+
+    <div class="skill-category cat-ai fade-in">
+      <div class="cat-title">AI-Assisted Development ✦</div>
+      <div class="skill-tags">
+        <span class="skill-tag highlight">Claude AI</span>
+        <span class="skill-tag highlight">Claude Code</span>
+        <span class="skill-tag highlight">Prompt Engineering</span>
+        <span class="skill-tag highlight">AI 코드 리뷰</span>
+        <span class="skill-tag highlight">AI 기반 문서화</span>
+      </div>
+    </div>
+
+    <div class="skill-category cat-tools fade-in">
+      <div class="cat-title">Tools · Collaboration</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git / Github</span>
+        <span class="skill-tag">Eclipse</span>
+        <span class="skill-tag">VSCode</span>
+        <span class="skill-tag">PHP</span>
+        <span class="skill-tag">Waterfall / Agile</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">경력 사항</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="exp-container">
+
+    <!-- 아데나소프트 -->
+    <div class="exp-item fade-in">
+      <div class="exp-meta">
+        <div class="exp-period">2022.10 ~<br>현재</div>
+        <div class="exp-current">재직 중</div>
+      </div>
+      <div>
+        <div class="exp-company">아데나소프트(주)</div>
+        <div class="exp-role">Java Backend Developer · SI Engineer</div>
+        <div class="exp-desc">
+          보험업계 특화 <strong style="color:var(--text)">전자청약·코브라우징 PDF 솔루션</strong> 기반의 SI 프로젝트를 수행하는 회사입니다.
+          DB손해보험·KB손해보험·한화손해보험 등 국내 주요 보험사를 대상으로
+          TM·GA 채널의 <strong style="color:var(--text)">미러링 전자청약 시스템</strong>을 설계·구축·운영하고 있습니다.
+        </div>
+
+        <div class="exp-projects">
+          <div class="project-card">
+            <div class="project-name">DB손해보험 GA·TM 미러링 전자청약 시스템</div>
+            <div class="project-detail">GA·TM 채널 비대면 청약 프로세스 구축. 기간계 인터페이스 연동, 백엔드 API 개발, 인프라 서버 구성.</div>
+            <div class="project-period">23.03 ~ 23.07 / 24.11 ~ 현재 (고도화)</div>
+          </div>
+          <div class="project-card">
+            <div class="project-name">KB손해보험 장기 TM 미러링 시스템</div>
+            <div class="project-detail">장기보험 TM 청약 시스템 신규 구축. Oracle DB 기반 데이터 설계, WAS(JEUS) 서버 운영.</div>
+            <div class="project-period">23.08 ~ 24.03</div>
+          </div>
+          <div class="project-card">
+            <div class="project-name">한화손해보험 TM·GA TM 미러링 시스템</div>
+            <div class="project-detail">장기 및 자동차보험 채널 통합 청약 시스템 구축. 멀티 WAS(JBOSS) 환경 운영 및 성능 최적화.</div>
+            <div class="project-period">24.03 ~ 24.08</div>
+          </div>
+        </div>
+
+        <div class="exp-tasks">
+          <div class="exp-tasks-title">주요 담당 업무</div>
+          <ul class="task-list">
+            <li>보험사 기간계(코어 시스템) 인터페이스 분석 및 Java 백엔드 API 개발</li>
+            <li>Linux(CentOS/Ubuntu) 환경의 WEB·WAS 서버 구축 및 운영 (LENA, JEUS, JBOSS)</li>
+            <li>Oracle DB / MariaDB 스키마 설계 및 프로시저·쿼리 개발</li>
+            <li>JSP 기반 프론트엔드 화면 구현 및 유지보수</li>
+            <li>신규 프로젝트 착수부터 오픈까지 전 단계 참여 (Waterfall 방법론)</li>
+            <li>Claude AI 활용 코드 리뷰·문서화·기술 검토로 개발 생산성 향상</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 원티드 -->
+    <div class="exp-item fade-in">
+      <div class="exp-meta">
+        <div class="exp-period">2022.07 ~<br>2022.09</div>
+      </div>
+      <div>
+        <div class="exp-company">원티드 프리온보딩</div>
+        <div class="exp-role">Frontend Course 5th · 수료</div>
+        <div class="exp-desc">
+          원티드 주관 취업 연계형 프론트엔드 심화 과정. TypeScript, 상태관리(Redux·Recoil·React Query),
+          아키텍처 설계, CSR/SSR 등 고급 개념을 학습하고, 4개의 팀 미니 프로젝트를 통해 협업 역량을 강화했습니다.
+        </div>
+        <ul class="task-list">
+          <li>Infinite Scroll, Navigation, Slide 등 컴포넌트 직접 구현</li>
+          <li>광고 플랫폼 대시보드 — Axios data fetching, 차트 라이브러리 활용</li>
+          <li>호텔 예약 사이트 — LocalStorage 기반 인증, 날짜별 예약 기능</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 퍼스트 -->
+    <div class="exp-item fade-in">
+      <div class="exp-meta">
+        <div class="exp-period">2021.05 ~<br>2022.05</div>
+      </div>
+      <div>
+        <div class="exp-company">퍼스트 (스타트업)</div>
+        <div class="exp-role">Frontend & Fullstack Developer</div>
+        <div class="exp-desc">
+          여성 전문 구독형 패션 스타일링 서비스 스타트업. 서버 구축부터 프론트엔드 개발까지
+          <strong style="color:var(--text)">1인 개발 체계</strong>로 전 영역을 담당했습니다.
+        </div>
+        <ul class="task-list">
+          <li>Linux(CentOS7) + Apache 서버 구축 및 관리 (카페24 VPS)</li>
+          <li>Wordpress + PHP로 홈페이지 백엔드 구성, React로 고객·마이페이지 등 주요 화면 개발</li>
+          <li>MySQL + Express로 구독 정보 관리 시스템 자체 구현</li>
+          <li>REST API로 고객·상품·구독 데이터 통신 설계</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDU & CERT -->
+<section id="edu">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">학력 · 자격증</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="edu-cert-grid">
+
+    <div class="fade-in">
+      <div class="edu-sub-title">Education</div>
+
+      <div class="edu-item">
+        <div class="edu-school">국가평생교육진흥원</div>
+        <div class="edu-dept">컴퓨터공학 학사</div>
+        <div class="edu-period">2020.03 ~ 2022.02</div>
+        <div class="edu-detail">개발방법론, 운영체제, 소프트웨어공학, 전산, 정보통신 이수</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-school">이젠아카데미컴퓨터학원</div>
+        <div class="edu-dept">자바 안드로이드 웹&앱 개발자 교육과정</div>
+        <div class="edu-period">2020.07 ~ 2021.02</div>
+        <div class="edu-detail">NCS 응용SW엔지니어링 · Java, Android, Web, DB, Arduino</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-school">서울과학기술대학교</div>
+        <div class="edu-dept">산업공학과 (3년 수료)</div>
+        <div class="edu-period">2012.03 ~ 2016.11</div>
+        <div class="edu-detail">대학물리학, 공업경제, 확률통계 이수</div>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <div class="edu-sub-title">Certificates</div>
+
+      <div class="cert-item">
+        <div class="cert-icon">🏆</div>
+        <div>
+          <div class="cert-name">정보처리산업기사</div>
+          <div class="cert-meta">한국산업인력공단 · 2021.08</div>
+        </div>
+      </div>
+
+      <div class="cert-item">
+        <div class="cert-icon">🌐</div>
+        <div>
+          <div class="cert-name">네트워크관리사 2급</div>
+          <div class="cert-meta">한국정보통신자격협회 · 2021.07</div>
+        </div>
+      </div>
+
+      <div class="cert-item">
+        <div class="cert-icon">💻</div>
+        <div>
+          <div class="cert-name">컴퓨터활용능력 1급</div>
+          <div class="cert-meta">대한상공회의소 · 2021.04</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-text">
+    조현호 · Java Backend Developer · twinh601@gmail.com · github.com/hajun2<br>
+    <span style="color:var(--border)">──────────────────────</span><br>
+    Built with Claude AI · 2025
+  </div>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Stagger children of same parent
+  document.querySelectorAll('.skills-grid, .exp-container').forEach(container => {
+    const children = container.querySelectorAll('.fade-in');
+    children.forEach((child, i) => {
+      child.style.transitionDelay = `${i * 80}ms`;
+    });
+  });
+</script>
+</body>
+</html>
