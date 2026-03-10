@@ -344,6 +344,7 @@
     .skill-category.cat-front::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
     .skill-category.cat-ai::before { background: linear-gradient(180deg, #ec4899, #be185d); }
     .skill-category.cat-tools::before { background: linear-gradient(180deg, #64748b, #475569); }
+    .skill-category.cat-lib::before { background: linear-gradient(180deg, #06b6d4, #0891b2); }
 
     .skill-category:hover { border-color: rgba(59,130,246,0.4); }
 
@@ -362,6 +363,7 @@
     .cat-front .cat-title { color: #a78bfa; }
     .cat-ai .cat-title { color: #f472b6; }
     .cat-tools .cat-title { color: #94a3b8; }
+    .cat-lib .cat-title { color: #22d3ee; }
 
     .skill-tags {
       display: flex;
@@ -622,6 +624,129 @@
       color: var(--text3);
     }
 
+    /* ── PORTFOLIO ── */
+    #portfolio { background: var(--bg2); }
+
+    .portfolio-project { margin-bottom: 64px; }
+
+    .portfolio-project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .portfolio-project-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent2);
+      margin-bottom: 32px;
+    }
+
+    .portfolio-arch-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .portfolio-arch-title {
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .arch-diagram {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 2;
+      white-space: pre;
+    }
+
+    .arch-highlight { color: var(--accent2); }
+
+    .portfolio-features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+
+    .feature-card:hover { border-color: rgba(59,130,246,0.4); }
+
+    .feature-icon {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .feature-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .feature-desc {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+
+    .portfolio-stack {
+      margin-bottom: 32px;
+    }
+
+    .portfolio-stack-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text3);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .portfolio-stats-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .portfolio-stat-box {
+      background: var(--card);
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .portfolio-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent2);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .portfolio-stat-label {
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.03em;
+    }
+
     /* ── FOOTER ── */
     footer {
       padding: 48px;
@@ -658,6 +783,8 @@
       .stats-row { grid-template-columns: repeat(2, 1fr); }
       .exp-item { grid-template-columns: 1fr; gap: 16px; }
       .edu-cert-grid { grid-template-columns: 1fr; }
+      .portfolio-stats-row { grid-template-columns: repeat(3, 1fr); }
+      .arch-diagram { font-size: 10px; white-space: pre-wrap; }
     }
   </style>
 </head>
@@ -670,6 +797,7 @@
     <li><a href="#about">소개</a></li>
     <li><a href="#skills">기술스택</a></li>
     <li><a href="#experience">경력</a></li>
+    <li><a href="#portfolio">포트폴리오</a></li>
     <li><a href="#edu">학력·자격증</a></li>
   </ul>
 </nav>
@@ -759,6 +887,12 @@
         <span class="skill-tag">JSP</span>
         <span class="skill-tag">REST API</span>
         <span class="skill-tag">MyBatis</span>
+        <span class="skill-tag">Spring WebSocket</span>
+        <span class="skill-tag">STOMP</span>
+        <span class="skill-tag">Hazelcast</span>
+        <span class="skill-tag">Spring Session</span>
+        <span class="skill-tag">JWT</span>
+        <span class="skill-tag">Log4j2</span>
       </div>
     </div>
 
@@ -773,6 +907,9 @@
         <span class="skill-tag">JBOSS</span>
         <span class="skill-tag">Docker</span>
         <span class="skill-tag">WEB/WAS 구성</span>
+        <span class="skill-tag">2-node Cluster</span>
+        <span class="skill-tag">Maven Profile</span>
+        <span class="skill-tag">L4 Load Balancing</span>
       </div>
     </div>
 
@@ -780,10 +917,13 @@
       <div class="cat-title">Database</div>
       <div class="skill-tags">
         <span class="skill-tag">Oracle DB</span>
+        <span class="skill-tag">Oracle 19c</span>
         <span class="skill-tag">MySQL</span>
         <span class="skill-tag">MariaDB</span>
+        <span class="skill-tag">MariaDB 11.3</span>
         <span class="skill-tag">SQL 튜닝</span>
         <span class="skill-tag">프로시저 개발</span>
+        <span class="skill-tag">프로파일 기반 DB 전환</span>
       </div>
     </div>
 
@@ -817,8 +957,22 @@
         <span class="skill-tag">Git / Github</span>
         <span class="skill-tag">Eclipse</span>
         <span class="skill-tag">VSCode</span>
+        <span class="skill-tag">Maven</span>
         <span class="skill-tag">PHP</span>
         <span class="skill-tag">Waterfall / Agile</span>
+      </div>
+    </div>
+
+    <div class="skill-category cat-lib fade-in">
+      <div class="cat-title">Library · Integration</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Apache POI</span>
+        <span class="skill-tag">PDFBox</span>
+        <span class="skill-tag">BouncyCastle</span>
+        <span class="skill-tag">Howler.js</span>
+        <span class="skill-tag">SockJS</span>
+        <span class="skill-tag">Lombok</span>
+        <span class="skill-tag">Jackson</span>
       </div>
     </div>
 
@@ -853,17 +1007,17 @@
         <div class="exp-projects">
           <div class="project-card">
             <div class="project-name">DB손해보험 GA·TM 미러링 전자청약 시스템</div>
-            <div class="project-detail">GA·TM 채널 비대면 청약 프로세스 구축. 기간계 인터페이스 연동, 백엔드 API 개발, 인프라 서버 구성.</div>
+            <div class="project-detail">GA·TM 채널 비대면 청약 프로세스 구축. 기간계(코어 시스템) 인터페이스 연동 및 Java 백엔드 API 개발. LENA WAS 기반 WEB·WAS 서버 구성, MariaDB 11.3 스키마 설계 및 프로시저 개발.</div>
             <div class="project-period">23.03 ~ 23.07 / 24.11 ~ 현재 (고도화)</div>
           </div>
           <div class="project-card">
             <div class="project-name">KB손해보험 장기 TM 미러링 시스템</div>
-            <div class="project-detail">장기보험 TM 청약 시스템 신규 구축. Oracle DB 기반 데이터 설계, WAS(JEUS) 서버 운영.</div>
+            <div class="project-detail">장기보험 TM 청약 시스템 신규 구축. Oracle 19c 기반 DB 스키마 설계 및 데이터 모델링. JEUS WAS 클러스터링 구성 및 운영, 기간계 IF 분석·연동.</div>
             <div class="project-period">23.08 ~ 24.03</div>
           </div>
           <div class="project-card">
             <div class="project-name">한화손해보험 TM·GA TM 미러링 시스템</div>
-            <div class="project-detail">장기 및 자동차보험 채널 통합 청약 시스템 구축. 멀티 WAS(JBOSS) 환경 운영 및 성능 최적화.</div>
+            <div class="project-detail">장기 및 자동차보험 채널 통합 청약 시스템 구축. JBOSS 멀티 WAS 환경 구성·운영, 쿼리 튜닝 및 인덱스 최적화로 조회 성능 개선. 기간계 연동 API 일괄 개발.</div>
             <div class="project-period">24.03 ~ 24.08</div>
           </div>
         </div>
@@ -876,6 +1030,8 @@
             <li>Oracle DB / MariaDB 스키마 설계 및 프로시저·쿼리 개발</li>
             <li>JSP 기반 프론트엔드 화면 구현 및 유지보수</li>
             <li>신규 프로젝트 착수부터 오픈까지 전 단계 참여 (Waterfall 방법론)</li>
+            <li>Hazelcast 5.2 분산 세션 관리 및 2노드 클러스터 구성 (active-active HA)</li>
+            <li>Spring WebSocket + STOMP 기반 실시간 미러링 아키텍처 설계 및 구현</li>
             <li>Claude AI 활용 코드 리뷰·문서화·기술 검토로 개발 생산성 향상</li>
           </ul>
         </div>
@@ -926,10 +1082,117 @@
   </div>
 </section>
 
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">포트폴리오</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="portfolio-project fade-in">
+    <div class="portfolio-project-title">TMM — TeleMarketing Mirroring 시스템</div>
+    <div class="portfolio-project-sub">// 보험 TM 상담 전자문서 실시간 미러링 + 음원 관리 · 엔터프라이즈 단독 개발</div>
+
+    <!-- Architecture -->
+    <div class="portfolio-arch-card">
+      <div class="portfolio-arch-title">시스템 아키텍처</div>
+      <div class="arch-diagram"><span class="arch-highlight">[ Browser ]</span>  상담사 뷰어 · 고객 뷰어 · 관리자 페이지
+      │
+      ▼
+<span class="arch-highlight">[ Apache HTTPD 2.4 ]</span>  L4 Load Balancer / Reverse Proxy
+      │                ├── /mng  →  mng_sdk WAR
+      │                └── /cms  →  cms_sdk WAR
+      ▼
+<span class="arch-highlight">[ Tomcat — 2 Node Cluster ]</span>  cluster1 · cluster2
+      │   ├── Spring WebSocket + STOMP  (실시간 미러링)
+      │   └── Hazelcast 5.2             (분산 세션·캐시)
+      ▼
+<span class="arch-highlight">[ Database ]</span>  MariaDB 11.3  /  Oracle 19c  (프로파일 전환)</div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="portfolio-features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📡</div>
+        <div class="feature-name">실시간 미러링</div>
+        <div class="feature-desc">Spring WebSocket + STOMP 프로토콜로 상담사-고객 전자문서 실시간 동기화. Hazelcast connected-users-map으로 접속자 추적 및 세션 TTL 기반 이탈 처리.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎵</div>
+        <div class="feature-name">음원 관리 시스템</div>
+        <div class="feature-desc">WAV → MP3 자동 변환 (jump3r), Howler.js 스트리밍 재생·배속 조절. Apache POI Excel 일괄 배치등록, 버전 관리 및 중복 감지.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <div class="feature-name">상담 이력 · 리플레이</div>
+        <div class="feature-desc">상담 단계별 데이터 저장, LMS 발송·인증, 완전판매 모니터링. 완료 상담 리플레이 기능(Dual Viewer). PDFBox 기반 전자문서 처리.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <div class="feature-name">엔터프라이즈 배포</div>
+        <div class="feature-desc">6 Maven 프로파일(local/dev/linux/stg/release1/release2) 기반 환경 분리. 2노드 클러스터 HA 구성. Oracle/MariaDB 동시 지원 DDL.</div>
+      </div>
+    </div>
+
+    <!-- Tech Stack Tags -->
+    <div class="portfolio-stack">
+      <div class="portfolio-stack-title">기술 스택</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Java 8</span>
+        <span class="skill-tag">Spring Framework 5.3</span>
+        <span class="skill-tag">Spring Security</span>
+        <span class="skill-tag">Spring WebSocket</span>
+        <span class="skill-tag">STOMP</span>
+        <span class="skill-tag">Hazelcast 5.2</span>
+        <span class="skill-tag">Spring Session</span>
+        <span class="skill-tag">JWT</span>
+        <span class="skill-tag">MyBatis</span>
+        <span class="skill-tag">Log4j2</span>
+        <span class="skill-tag">Apache POI</span>
+        <span class="skill-tag">PDFBox</span>
+        <span class="skill-tag">BouncyCastle</span>
+        <span class="skill-tag">Howler.js</span>
+        <span class="skill-tag">SockJS</span>
+        <span class="skill-tag">Maven</span>
+        <span class="skill-tag">MariaDB 11.3</span>
+        <span class="skill-tag">Oracle 19c</span>
+        <span class="skill-tag">Apache HTTPD 2.4</span>
+        <span class="skill-tag">Tomcat</span>
+      </div>
+    </div>
+
+    <!-- Project Stats -->
+    <div class="portfolio-stats-row">
+      <div class="portfolio-stat-box">
+        <div class="portfolio-stat-num">50+</div>
+        <div class="portfolio-stat-label">Java 소스</div>
+      </div>
+      <div class="portfolio-stat-box">
+        <div class="portfolio-stat-num">60+</div>
+        <div class="portfolio-stat-label">JSP 페이지</div>
+      </div>
+      <div class="portfolio-stat-box">
+        <div class="portfolio-stat-num">19</div>
+        <div class="portfolio-stat-label">DB 테이블</div>
+      </div>
+      <div class="portfolio-stat-box">
+        <div class="portfolio-stat-num">8,474</div>
+        <div class="portfolio-stat-label">핵심 서비스 Lines</div>
+      </div>
+      <div class="portfolio-stat-box">
+        <div class="portfolio-stat-num">6</div>
+        <div class="portfolio-stat-label">배포 프로파일</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
 <!-- EDU & CERT -->
 <section id="edu">
   <div class="section-header">
-    <span class="section-num">03</span>
+    <span class="section-num">04</span>
     <h2 class="section-title">학력 · 자격증</h2>
     <div class="section-line"></div>
   </div>
